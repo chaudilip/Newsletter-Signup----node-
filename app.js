@@ -13,11 +13,13 @@ app.get("/",function(req,res){
     res.sendFile(__dirname + "/signup.html");
 });
 
+
 app.post("/",function(req,res){
     const firstName = req.body.fName;
     const lastName =req.body.lName;
     const email = req.body.email;
     const data =  {
+        // for accessing the key pair value 
         members : [
             {
                 email_address :email,
@@ -29,12 +31,12 @@ app.post("/",function(req,res){
             }
         ]
     };
-    const url = "https://us17.api.mailchimp.com/3.0/lists/f298033a37";
+    const url = "https://us(last_two_digits or_one_digit_after_apikey_after_word_us).api.mailchimp.com/3.0/lists/your_audience_id";
     
     const jsonData = JSON.stringify(data);
     const options = {
         method: "POST",
-        auth:"dilip3:12883bdbd482a28d77ef08fae422374a-us17"
+        auth:"anyname:api-key"//api key of your account it will be provided by mailchimp
     };
     const request = https.request(url,options,function(response){
         if(response.statusCode === 200){
@@ -61,8 +63,3 @@ app.listen(process.env.PORT || 3000,function(req,res){
 });
 
 
-// audience id
-// f298033a37
-
-//api key
-//12883bdbd482a28d77ef08fae422374a-us17
